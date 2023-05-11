@@ -1,53 +1,36 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import StartGameScreen from "./StartGameScreen";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default function GameScreen() {
+  function returnHandler() {
+    console.log("Return");
+  }
+
   return (
-    <View>
-      <View>
-        <text>Opponenet's Guess</text>
+    <View style={styles.screenContainer}>
+      <View style={styles.titleContainer}>
+        <Text>Opponenet's Guess</Text>
       </View>
-      <View></View>
+      <PrimaryButton>Return</PrimaryButton>
       <View></View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
+  screenContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    padding: 12,
     alignItems: "center",
     justifyContent: "center",
   },
   titleContainer: {
     padding: 16,
-    backgroundColor: "#fff",
-  },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    borderRadius: 6,
-    width: "80%",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "80%",
-    color: "#ffffff",
-    borderRadius: 6,
-    padding: 16,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    marginTop: 5,
-  },
-  button: {
-    width: "30%",
-    marginHorizontal: 8,
+    backgroundColor: "#59d98f",
+    borderRadius: 8,
+    elevation: 10,
   },
 });

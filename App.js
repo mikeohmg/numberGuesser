@@ -10,13 +10,25 @@ import {
 import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
+import GameScreen from "./screens/GameScreen";
 
 export default function App() {
   const [guessText, setGuess] = useState("");
+  const [userNumber, setUserNumber] = useState();
+
+  function startGameHandler(pickedNumber) {
+    setUserNumber(pickedNumber);
+  }
 
   function inputHandler(enteredText) {
     setGuess(enteredText);
     console.log(guessText);
+  }
+
+  let screen = <StartGameScreen onStartGame={startGameHandler} />;
+
+  if (userNumber) {
+    screen = <GameScreen />;
   }
 
   return (
@@ -52,7 +64,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <StartGameScreen />
+        {screen}
       </ImageBackground>
     </LinearGradient>
   );
