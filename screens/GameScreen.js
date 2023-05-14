@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 import { useState, useEffect } from "react";
 import StartGameScreen from "./StartGameScreen";
 import PrimaryButton from "../components/PrimaryButton";
+import Title from "../components/Title";
 
 export default function GameScreen() {
   function returnHandler() {
@@ -12,7 +13,7 @@ export default function GameScreen() {
   return (
     <View style={styles.screenContainer}>
       <View style={styles.titleContainer}>
-        <Text>Opponenet's Guess</Text>
+        <Title>Opponent's Guess</Title>
       </View>
       <PrimaryButton>Return</PrimaryButton>
       <View></View>
