@@ -1,23 +1,34 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  ImageBackground,
-  SafeAreaView,
-} from "react-native";
-import { useState } from "react";
-import StartGameScreen from "./screens/StartGameScreen";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import * as Font from "expo-font";
 import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
+import StartGameScreen from "./screens/StartGameScreen";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function App() {
   const [guessText, setGuess] = useState("");
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameisOver] = useState(true);
+
+  const [fontsLoaded] = Font.useFonts({
+    "comic-sans": require("./assets/fonts/LDFComicSans.ttf"),
+    "comic-sans-bold": require("./assets/fonts/LDFComicSansBold.ttf"),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  if (!fontsLoaded) {
+    return undefined;
+  } else {
+    SplashScreen.hideAsync();
+  }
 
   function startGameHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -44,31 +55,6 @@ export default function App() {
   }
 
   return (
-    /*  <View style={styles.appContainer}>
-      <View style={styles.titleContainer}>
-        <Text>Number Guessing Game</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <View>
-          <Text>Enter a Number</Text>
-        </View>
-        <View style={styles.textInput}>
-          <TextInput
-            placeholder="What is your guess?"
-            onChangeText={inputHandler}
-            value={guessText}
-          ></TextInput>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="Confirm" />
-          </View>
-          <View style={styles.button}>
-            <Button title="Reset" />
-          </View>
-        </View>
-      </View>
-    </View> */
     <LinearGradient colors={["#59d98f", "#cccccc"]} style={styles.rootScreen}>
       <ImageBackground
         source={require("./assets/images/background.jpg")}

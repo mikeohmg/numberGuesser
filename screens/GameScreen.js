@@ -1,11 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { useState, useEffect } from "react";
-import StartGameScreen from "./StartGameScreen";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
-import Colors from "../assets/constants/colors";
 import NumberContainer from "../components/game/NumberContainer";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -60,23 +60,26 @@ export default function GameScreen(props) {
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.titleContainer}>
-        <Title>Opponent's Guess</Title>
-      </View>
+      <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or Lower?</Text>
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-            +
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-            -
-          </PrimaryButton>
+      <Card>
+        <InstructionText style={styles.instructionText}>
+          Higher or Lower?
+        </InstructionText>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+              <Ionicons name="md-add" size={24} color="white" />
+            </PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              <Ionicons name="md-remove" size={24} color="white" />
+            </PrimaryButton>
+          </View>
         </View>
-      </View>
+      </Card>
       <PrimaryButton onPress={returnHandler}>Return</PrimaryButton>
-      <View></View>
     </View>
   );
 }
@@ -88,11 +91,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  titleContainer: {
-    width: "100%",
-    padding: 16,
-    backgroundColor: Colors.primary1,
-    borderRadius: 8,
-    elevation: 10,
+  buttonsContainer: {
+    flexDirection: "row",
+    marginTop: 5,
+  },
+  instructionText: {
+    marginBottom: 12,
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });

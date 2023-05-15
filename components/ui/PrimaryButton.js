@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   buttonText: {
+    fontFamily: "comic-sans-bold",
     color: "white",
     textAlign: "center",
-    fontWeight: "bold",
   },
   pressed: {
     opacity: 0.75,

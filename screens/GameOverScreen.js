@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../assets/constants/colors";
+
 function GameOverScreen() {
   return (
     <View style={styles.screenContainer}>
