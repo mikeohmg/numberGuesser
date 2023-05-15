@@ -12,13 +12,16 @@ import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./screens/GameScreen";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [guessText, setGuess] = useState("");
   const [userNumber, setUserNumber] = useState();
+  const [gameIsOver, setGameisOver] = useState(true);
 
   function startGameHandler(pickedNumber) {
     setUserNumber(pickedNumber);
+    setGameisOver(false);
   }
 
   function inputHandler(enteredText) {
@@ -26,10 +29,18 @@ export default function App() {
     console.log(guessText);
   }
 
+  function gameOverHandler() {
+    setGameisOver(true);
+  }
+
   let screen = <StartGameScreen onStartGame={startGameHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userInput={userNumber} gameIsOver={gameOverHandler} />;
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
   }
 
   return (

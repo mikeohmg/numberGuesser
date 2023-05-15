@@ -1,4 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import Colors from "../../assets/constants/colors";
 
 function PrimaryButton(props) {
   function pressHandler() {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonInnerContainer: {
-    backgroundColor: "#4bbd7a",
+    backgroundColor: Colors.secondary1,
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 10,
