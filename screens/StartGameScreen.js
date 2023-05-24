@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
 import { useState } from "react";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import Colors from "../assets/constants/colors";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";

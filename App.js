@@ -11,6 +11,7 @@ export default function App() {
   const [guessText, setGuess] = useState("");
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameisOver] = useState(true);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   const [fontsLoaded] = Font.useFonts({
     "comic-sans": require("./assets/fonts/LDFComicSans.ttf"),
@@ -35,23 +36,36 @@ export default function App() {
     setGameisOver(false);
   }
 
-  function inputHandler(enteredText) {
-    setGuess(enteredText);
-    console.log(guessText);
+  function gameOverHandler(numerOfRounds) {
+    setGameisOver(true);
+    setGuessRounds(numerOfRounds);
   }
 
-  function gameOverHandler() {
-    setGameisOver(true);
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGuessRounds(0);
   }
 
   let screen = <StartGameScreen onStartGame={startGameHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userInput={userNumber} gameIsOver={gameOverHandler} />;
+    screen = (
+      <GameScreen
+        userInput={userNumber}
+        gameIsOver={gameOverHandler}
+        onStarNewGame={startNewGameHandler}
+      />
+    );
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onStarNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
